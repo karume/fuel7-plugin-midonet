@@ -15,4 +15,3 @@
   parameters:
     strategy:
       type: parallel
-

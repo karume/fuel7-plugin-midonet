@@ -83,7 +83,7 @@ puppet module install deric-zookeeper --version=0.3.9 --ignore-dependencies --fo
 puppet module install puppetlabs-concat --version=1.2.4 --ignore-dependencies --force
 puppet module install nanliu-staging --version=1.0.4 --ignore-dependencies --force
 puppet module install puppetlabs-tomcat --version=1.3.2 --ignore-dependencies --force
-puppet module install midonet-midonet --version=2015.6.0 --ignore-dependencies --force
+puppet module install midonet-midonet --version=2015.6.7 --ignore-dependencies --force
 
 if [[ ! -a /etc/puppet/modules/neutron/manifests/plugins/midonet.pp ]]; then
   # Apply the released patch of Neutron Puppet to allow midonet manifests

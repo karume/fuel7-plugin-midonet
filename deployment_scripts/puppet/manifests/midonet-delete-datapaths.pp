@@ -4,7 +4,8 @@ $service_path = $operatingsystem ? {
 }
 
 exec {'service midolman stop':
-  path   => $service_path
+  path   => $service_path,
+  onlyif => 'ps aux | grep midolman | grep -v grep'
 } ->
 
 exec {'/usr/bin/mm-dpctl --delete-dp ovs-system':
@@ -24,3 +25,4 @@ exec {'sleep 3':
 exec {'service midolman start':
   path   => $service_path
 }
+
