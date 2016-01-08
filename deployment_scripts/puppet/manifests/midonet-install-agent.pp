@@ -59,5 +59,3 @@ firewall {'6677 vxlan port':
   action => 'accept',
 }
 
-}
-
