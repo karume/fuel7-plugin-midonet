@@ -1,5 +1,7 @@
 # Extract data from hiera
 $network_metadata = hiera_hash('network_metadata')
+$neutron_config   = hiera_hash('neutron_config')
+$segmentation_type = $neutron_config['L2']['segmentation_type']
 $nsdb_hash        = get_nodes_hash_by_roles($network_metadata, ['nsdb'])
 $nsdb_mgmt_ips    = get_node_to_ipaddr_map_by_network_role($nsdb_hash, 'management')
 $zoo_ips_hash     = generate_api_zookeeper_ips(values($nsdb_mgmt_ips))
@@ -53,9 +55,11 @@ class {'::midonet::midonet_cli':
 # Firewall rule to allow the udp port used for vxlan tunnelling of overlay
 #  traffic from midolman hosts to other midolman hosts.
 
-firewall {'6677 vxlan port':
-  port   => '6677',
-  proto  => 'udp',
-  action => 'accept',
+if $segmentation_type =='tun' {
+  firewall {'6677 vxlan port':
+    port   => '6677',
+    proto  => 'udp',
+    action => 'accept',
+  }
 }
 
